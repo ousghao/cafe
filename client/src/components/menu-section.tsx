@@ -50,7 +50,7 @@ export default function MenuSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-deep-black mb-4">
-            {t('menu.title')} <span className="text-gold">{t('menu.titleHighlight')}</span>
+            {t('menu.title')} <span className="text-teal">{t('menu.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             {t('menu.description')}
@@ -65,8 +65,8 @@ export default function MenuSection() {
               variant={activeCategory === category.id ? "default" : "outline"}
               className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeCategory === category.id 
-                  ? 'bg-gold text-white hover:bg-gold'
-                  : 'bg-white hover:bg-gold hover:text-white text-gray-700'
+                  ? 'bg-teal text-white hover:bg-teal'
+                  : 'bg-white hover:bg-teal hover:text-white text-gray-700'
               }`}
               onClick={() => setActiveCategory(category.id)}
             >
@@ -118,10 +118,10 @@ export default function MenuSection() {
                     </div>
                   )}
                   <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-gold">
+                    <span className="text-2xl font-bold text-teal">
                       {item.price} DH
                     </span>
-                    <Button className="bg-gold hover:bg-gold text-white px-4 py-2 rounded-full font-medium transition-colors duration-300">
+                    <Button className="bg-teal hover:bg-teal text-white px-4 py-2 rounded-full font-medium transition-colors duration-300">
                       {t('menu.order')}
                     </Button>
                   </div>

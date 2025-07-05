@@ -42,7 +42,7 @@ export default function Navigation() {
           {/* Logo */}
           <div className="flex items-center">
             <div className="text-2xl lg:text-3xl font-serif font-bold text-deep-black">
-              <span className="text-gold">Assouan</span> Fès
+              <span className="text-teal">Assouan</span> Fès
             </div>
           </div>
           
@@ -52,7 +52,7 @@ export default function Navigation() {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-gray-700 hover:text-gold transition-colors duration-300 font-medium"
+                className="text-gray-700 hover:text-teal transition-colors duration-300 font-medium"
               >
                 {t(link.label)}
               </button>
@@ -64,7 +64,7 @@ export default function Navigation() {
             <div className="flex items-center space-x-2 text-sm">
               <button 
                 className={`font-medium transition-colors ${
-                  language === 'fr' ? 'text-gold' : 'text-gray-500 hover:text-gold'
+                  language === 'fr' ? 'text-teal' : 'text-gray-500 hover:text-teal'
                 }`}
                 onClick={() => setLanguage('fr')}
               >
@@ -73,7 +73,7 @@ export default function Navigation() {
               <span className="text-gray-300">|</span>
               <button 
                 className={`transition-colors ${
-                  language === 'en' ? 'text-gold font-medium' : 'text-gray-500 hover:text-gold'
+                  language === 'en' ? 'text-teal font-medium' : 'text-gray-500 hover:text-teal'
                 }`}
                 onClick={() => setLanguage('en')}
               >
@@ -82,7 +82,7 @@ export default function Navigation() {
               <span className="text-gray-300">|</span>
               <button 
                 className={`transition-colors ${
-                  language === 'ar' ? 'text-gold font-medium' : 'text-gray-500 hover:text-gold'
+                  language === 'ar' ? 'text-teal font-medium' : 'text-gray-500 hover:text-teal'
                 }`}
                 onClick={() => setLanguage('ar')}
               >
@@ -90,7 +90,7 @@ export default function Navigation() {
               </button>
             </div>
             <Button 
-              className="bg-gold hover:bg-gold text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
+              className="bg-teal hover:bg-teal text-white px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
               onClick={() => scrollToSection('#reservation')}
             >
               {t('nav.reserve')}

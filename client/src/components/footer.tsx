@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="text-3xl font-serif font-bold mb-4">
-              <span className="text-gold">Assouan</span> Fès
+              <span className="text-teal">Assouan</span> Fès
             </div>
             <p className="text-gray-400 mb-6">
               {t('footer.tagline')}
@@ -27,19 +27,19 @@ export default function Footer() {
             <div className="flex space-x-4">
               <Button 
                 size="icon"
-                className="w-10 h-10 bg-gold hover:bg-gold rounded-full transition-colors duration-300"
+                className="w-10 h-10 bg-teal hover:bg-teal rounded-full transition-colors duration-300"
               >
                 <i className="fab fa-facebook-f text-sm"></i>
               </Button>
               <Button 
                 size="icon"
-                className="w-10 h-10 bg-gold hover:bg-gold rounded-full transition-colors duration-300"
+                className="w-10 h-10 bg-teal hover:bg-teal rounded-full transition-colors duration-300"
               >
                 <i className="fab fa-instagram text-sm"></i>
               </Button>
               <Button 
                 size="icon"
-                className="w-10 h-10 bg-gold hover:bg-gold rounded-full transition-colors duration-300"
+                className="w-10 h-10 bg-teal hover:bg-teal rounded-full transition-colors duration-300"
               >
                 <i className="fab fa-whatsapp text-sm"></i>
               </Button>
@@ -48,7 +48,7 @@ export default function Footer() {
           
           {/* Navigation Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-gold">{t('footer.navigation')}</h3>
+            <h3 className="text-lg font-semibold mb-4 text-teal">{t('footer.navigation')}</h3>
             <ul className="space-y-2">
               <li>
                 <button 
@@ -95,7 +95,7 @@ export default function Footer() {
           
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-gold">{t('footer.services')}</h3>
+            <h3 className="text-lg font-semibold mb-4 text-teal">{t('footer.services')}</h3>
             <ul className="space-y-2">
               <li>
                 <button 
@@ -133,15 +133,15 @@ export default function Footer() {
           
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-gold">{t('footer.newsletter')}</h3>
+            <h3 className="text-lg font-semibold mb-4 text-teal">{t('footer.newsletter')}</h3>
             <p className="text-gray-400 mb-4 text-sm">{t('footer.newsletterDescription')}</p>
             <div className="space-y-3">
               <Input 
                 type="email"
                 placeholder={t('footer.emailPlaceholder')}
-                className="bg-gray-800 border-gray-600 text-white focus:border-gold"
+                className="bg-gray-800 border-gray-600 text-white focus:border-teal"
               />
-              <Button className="w-full bg-gold hover:bg-gold text-white rounded-lg font-medium transition-colors duration-300">
+              <Button className="w-full bg-teal hover:bg-teal text-white rounded-lg font-medium transition-colors duration-300">
                 {t('footer.subscribe')}
               </Button>
             </div>

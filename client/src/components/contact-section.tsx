@@ -58,7 +58,7 @@ export default function ContactSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-deep-black mb-4">
-            {t('contact.title')} <span className="text-gold">{t('contact.titleHighlight')}</span>
+            {t('contact.title')} <span className="text-teal">{t('contact.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600">
             {t('contact.description')}
@@ -73,8 +73,8 @@ export default function ContactSection() {
                 <h3 className="text-2xl font-semibold text-deep-black mb-6">{t('contact.coordinates')}</h3>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="text-gold w-5 h-5" />
+                    <div className="w-12 h-12 bg-teal/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPin className="text-teal w-5 h-5" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-deep-black">{t('contact.address')}</h4>
@@ -83,13 +83,13 @@ export default function ContactSection() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Phone className="text-gold w-5 h-5" />
+                    <div className="w-12 h-12 bg-teal/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="text-teal w-5 h-5" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-deep-black">{t('contact.phone')}</h4>
                       <p className="text-gray-600">+212 5 35 62 34 56</p>
-                      <Button variant="link" className="text-gold hover:text-gold p-0 h-auto font-medium">
+                      <Button variant="link" className="text-teal hover:text-teal p-0 h-auto font-medium">
                         {t('contact.callNow')}
                       </Button>
                     </div>
@@ -271,7 +271,7 @@ export default function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-gold hover:bg-gold text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                      className="w-full bg-teal hover:bg-teal text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                       disabled={mutation.isPending}
                     >
                       <Send className="mr-2 h-5 w-5" />
@@ -287,10 +287,10 @@ export default function ContactSection() {
               <div className="h-96 bg-gray-200 relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <MapPin className="text-gold w-16 h-16 mx-auto mb-4" />
+                    <MapPin className="text-teal w-16 h-16 mx-auto mb-4" />
                     <h4 className="text-xl font-semibold text-deep-black mb-2">{t('contact.interactiveMap')}</h4>
                     <p className="text-gray-600 mb-4">{t('contact.fullAddress')}</p>
-                    <Button className="bg-gold hover:bg-gold text-white px-6 py-3 rounded-full font-medium transition-colors duration-300">
+                    <Button className="bg-teal hover:bg-teal text-white px-6 py-3 rounded-full font-medium transition-colors duration-300">
                       <i className="fas fa-directions mr-2"></i>
                       {t('contact.getDirections')}
                     </Button>

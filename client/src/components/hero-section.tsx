@@ -25,7 +25,7 @@ export default function HeroSection() {
       
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 animate-fade-in">
-          <span className="text-gold">Assouan</span> Fès
+          <span className="text-teal">Assouan</span> Fès
         </h1>
         <p className="text-xl md:text-2xl lg:text-3xl mb-4 animate-slide-up opacity-90">
           {t('hero.tagline')}
@@ -36,7 +36,7 @@ export default function HeroSection() {
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
           <Button 
-            className="bg-gold hover:bg-gold text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="bg-teal hover:bg-teal text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
             onClick={() => scrollToSection('#menu')}
           >
             <Utensils className="mr-2 h-5 w-5" />

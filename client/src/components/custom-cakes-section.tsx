@@ -86,7 +86,7 @@ export default function CustomCakesSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-deep-black mb-4">
-            {t('customCakes.title')} <span className="text-gold">{t('customCakes.titleHighlight')}</span>
+            {t('customCakes.title')} <span className="text-teal">{t('customCakes.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             {t('customCakes.description')}
@@ -293,10 +293,10 @@ export default function CustomCakesSection() {
                   
                   <div>
                     <FormLabel>{t('customCakes.form.inspirationPhotos')}</FormLabel>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gold transition-colors duration-300 mt-2">
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-teal transition-colors duration-300 mt-2">
                       <CloudUpload className="text-gray-400 w-12 h-12 mx-auto mb-2" />
                       <p className="text-gray-600">{t('customCakes.form.uploadDescription')}</p>
-                      <Button type="button" variant="outline" className="mt-2 text-gold hover:text-gold">
+                      <Button type="button" variant="outline" className="mt-2 text-teal hover:text-teal">
                         {t('customCakes.form.browseFiles')}
                       </Button>
                     </div>
@@ -304,7 +304,7 @@ export default function CustomCakesSection() {
                   
                   <Button 
                     type="submit" 
-                    className="w-full bg-gold hover:bg-gold text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                    className="w-full bg-teal hover:bg-teal text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                     disabled={mutation.isPending}
                   >
                     <Send className="mr-2 h-5 w-5" />

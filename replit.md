@@ -120,6 +120,7 @@ This is a full-stack web application for Assouan Café-Pâtisserie-Restaurant, a
 
 Changelog:
 - July 05, 2025. Initial setup
+- July 05, 2025. Updated color scheme from gold to dark teal (#2A9CA3) per user request. Complete theme transformation across all components including navigation, hero, menu, about, reservations, custom cakes, contact, and footer sections.
 
 ## User Preferences
 

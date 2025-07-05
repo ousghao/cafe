@@ -71,7 +71,7 @@ export default function ReservationSection() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl lg:text-5xl font-serif font-bold text-deep-black mb-4">
-              {t('reservation.title')} <span className="text-gold">{t('reservation.titleHighlight')}</span>
+              {t('reservation.title')} <span className="text-teal">{t('reservation.titleHighlight')}</span>
             </h2>
             <p className="text-xl text-gray-600">
               {t('reservation.description')}
@@ -238,7 +238,7 @@ export default function ReservationSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-gold hover:bg-gold text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                      className="w-full bg-teal hover:bg-teal text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                       disabled={mutation.isPending}
                     >
                       <CalendarCheck className="mr-2 h-5 w-5" />
@@ -262,11 +262,11 @@ export default function ReservationSection() {
                   <h3 className="text-xl font-semibold text-deep-black mb-4">{t('reservation.practicalInfo')}</h3>
                   <div className="space-y-3">
                     <div className="flex items-center">
-                      <Clock className="text-gold w-5 h-5 mr-3" />
+                      <Clock className="text-teal w-5 h-5 mr-3" />
                       <span className="text-gray-700">{t('reservation.hours')}</span>
                     </div>
                     <div className="flex items-center">
-                      <Phone className="text-gold w-5 h-5 mr-3" />
+                      <Phone className="text-teal w-5 h-5 mr-3" />
                       <span className="text-gray-700">+212 5 35 62 34 56</span>
                     </div>
                     <div className="flex items-center">
