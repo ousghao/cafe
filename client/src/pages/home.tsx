@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
 import MenuSection from "@/components/menu-section";
@@ -8,11 +9,13 @@ import CustomCakesSection from "@/components/custom-cakes-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import FloatingWhatsApp from "@/components/floating-whatsapp";
+import CartSidebar from "@/components/CartSidebar";
 
 export default function Home() {
+  const [cartOpen, setCartOpen] = useState(false);
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Navigation onCartClick={() => setCartOpen(true)} />
       <HeroSection />
       
       {/* Quick Info Banner */}
@@ -48,6 +51,7 @@ export default function Home() {
       <ContactSection />
       <Footer />
       <FloatingWhatsApp />
+      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} />
     </div>
   );
 }

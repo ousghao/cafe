@@ -13,6 +13,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { insertReservationSchema, type InsertReservation } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { CalendarCheck, Clock, Phone, MapPin, Wifi } from "lucide-react";
+import { createClient } from '@/lib/supabase';
 
 export default function ReservationSection() {
   const { t } = useLanguage();
@@ -35,7 +36,17 @@ export default function ReservationSection() {
 
   const mutation = useMutation({
     mutationFn: async (data: InsertReservation) => {
-      return apiRequest("POST", "/api/reservations", data);
+      const supabase = createClient();
+      return supabase.from('reservations').insert({
+        full_name: data.name,
+        phone: data.phone,
+        email: data.email,
+        date: data.date,
+        time: data.time,
+        persons: data.guests,
+        notes: data.notes,
+        status: 'pending',
+      });
     },
     onSuccess: () => {
       toast({
@@ -120,7 +131,7 @@ export default function ReservationSection() {
                         <FormItem>
                           <FormLabel>{t('reservation.form.email')}</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder={t('reservation.form.emailPlaceholder')} {...field} />
+                            <Input type="email" placeholder={t('reservation.form.emailPlaceholder')} {...field} value={String(field.value ?? '')} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -229,6 +240,7 @@ export default function ReservationSection() {
                               rows={3}
                               placeholder={t('reservation.form.notesPlaceholder')}
                               {...field} 
+                              value={String(field.value ?? '')}
                             />
                           </FormControl>
                           <FormMessage />

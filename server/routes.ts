@@ -1,25 +1,44 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { SupabaseService } from "./services/supabase-service";
 import { insertReservationSchema, insertCustomCakeInquirySchema, insertContactMessageSchema } from "@shared/schema";
 import { z } from "zod";
+import 'dotenv/config';
+
+const supabaseService = new SupabaseService();
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Menu endpoints
   app.get("/api/menu", async (req, res) => {
     try {
       const { category } = req.query;
-      let menuItems;
+      let dishes: any[] = [];
       
       if (category && typeof category === 'string') {
-        menuItems = await storage.getMenuItemsByCategory(category);
+        // Récupérer d'abord le type de plat par slug
+        const dishTypes = await supabaseService.getDishTypes();
+        const dishType = dishTypes.find(dt => dt.slug === category);
+        if (dishType) {
+          dishes = await supabaseService.getDishes(dishType.id);
+        }
       } else {
-        menuItems = await storage.getMenuItems();
+        dishes = await supabaseService.getDishes();
       }
       
-      res.json(menuItems);
+      res.json(dishes);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch menu items" });
+    }
+  });
+
+  // Vérification de disponibilité des réservations
+  app.post("/api/reservations/check", async (req, res) => {
+    try {
+      const { date, time } = req.body;
+      const availability = await supabaseService.checkReservationAvailability(date, time);
+      res.json(availability);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to check availability" });
     }
   });
 
@@ -27,7 +46,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/reservations", async (req, res) => {
     try {
       const validatedData = insertReservationSchema.parse(req.body);
-      const reservation = await storage.createReservation(validatedData);
+      
+      // Vérifier la disponibilité
+      const availability = await supabaseService.checkReservationAvailability(
+        validatedData.date, 
+        validatedData.time
+      );
+      
+      // Adapter les données pour le nouveau schéma Supabase
+      const supabaseReservation = {
+        full_name: validatedData.name,
+        phone: validatedData.phone,
+        email: validatedData.email,
+        date: validatedData.date,
+        time: validatedData.time,
+        persons: validatedData.guests,
+        notes: validatedData.notes,
+        status: availability.available ? 'pending' : 'waitlist'
+      };
+      
+      const reservation = await supabaseService.createReservation(supabaseReservation);
       res.status(201).json(reservation);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -40,7 +78,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/reservations", async (req, res) => {
     try {
-      const reservations = await storage.getReservations();
+      const reservations = await supabaseService.getReservations();
       res.json(reservations);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch reservations" });
@@ -51,7 +89,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/custom-cakes", async (req, res) => {
     try {
       const validatedData = insertCustomCakeInquirySchema.parse(req.body);
-      const inquiry = await storage.createCustomCakeInquiry(validatedData);
+      
+      // Adapter les données pour le nouveau schéma Supabase
+      const supabaseOrder = {
+        full_name: validatedData.name,
+        email: validatedData.email || '',
+        phone: validatedData.phone,
+        type_event: validatedData.eventType,
+        persons: validatedData.guestCount,
+        date_needed: validatedData.eventDate,
+        budget: validatedData.budget,
+        description: validatedData.description,
+        img_refs: validatedData.inspirationPhotos
+      };
+      
+      const inquiry = await supabaseService.createOrder(supabaseOrder);
       res.status(201).json(inquiry);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -64,7 +116,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/custom-cakes", async (req, res) => {
     try {
-      const inquiries = await storage.getCustomCakeInquiries();
+      const inquiries = await supabaseService.getOrders();
       res.json(inquiries);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch custom cake inquiries" });
@@ -75,7 +127,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
-      const message = await storage.createContactMessage(validatedData);
+      
+      // Adapter les données pour le nouveau schéma Supabase
+      const supabaseMessage = {
+        full_name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        subject: validatedData.subject,
+        message: validatedData.message
+      };
+      
+      const message = await supabaseService.createMessage(supabaseMessage);
       res.status(201).json(message);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -88,12 +150,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/contact", async (req, res) => {
     try {
-      const messages = await storage.getContactMessages();
+      const messages = await supabaseService.getMessages();
       res.json(messages);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch contact messages" });
     }
   });
+
+  // Importer et enregistrer les routes d'administration
+  const { registerAdminRoutes } = await import('./admin-routes');
+  registerAdminRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;

@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useLanguage } from "@/hooks/use-language";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
+import { useCart } from './CartContext';
 
-export default function Navigation() {
+export default function Navigation({ onCartClick }: { onCartClick?: () => void }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { items } = useCart();
+  const cartCount = items.reduce((sum, i) => sum + i.quantity, 0);
 
   // Handle scroll effect
   React.useEffect(() => {
@@ -59,7 +62,7 @@ export default function Navigation() {
             ))}
           </div>
           
-          {/* Language Switcher & CTA */}
+          {/* Language Switcher & CTA & Cart */}
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm">
               <button 
@@ -94,6 +97,19 @@ export default function Navigation() {
               onClick={() => scrollToSection('#reservation')}
             >
               {t('nav.reserve')}
+            </Button>
+            <Button
+              variant="outline"
+              className="relative border-teal text-teal hover:bg-teal hover:text-white px-5 py-2 rounded-xl font-medium flex items-center gap-2"
+              onClick={onCartClick}
+            >
+              <ShoppingCart className="h-5 w-5 mr-2" />
+              Panier
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-teal text-white rounded-full text-xs font-bold px-2 py-0.5 shadow-md border-2 border-white">
+                  {cartCount}
+                </span>
+              )}
             </Button>
           </div>
           
@@ -142,6 +158,19 @@ export default function Navigation() {
                   onClick={() => scrollToSection('#reservation')}
                 >
                   {t('nav.reserve')}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="relative border-teal text-teal mt-2 flex items-center gap-2 px-5 py-2 rounded-xl font-medium"
+                  onClick={onCartClick}
+                >
+                  <ShoppingCart className="h-5 w-5 mr-2" />
+                  Panier
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-teal text-white rounded-full text-xs font-bold px-2 py-0.5 shadow-md border-2 border-white">
+                      {cartCount}
+                    </span>
+                  )}
                 </Button>
               </div>
             </SheetContent>

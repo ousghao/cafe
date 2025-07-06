@@ -11,6 +11,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { MapPin, Phone, Mail, Clock, Info, Send, MessageSquare } from "lucide-react";
+import { createClient } from '@/lib/supabase';
 
 export default function ContactSection() {
   const { t } = useLanguage();
@@ -30,7 +31,15 @@ export default function ContactSection() {
 
   const mutation = useMutation({
     mutationFn: async (data: InsertContactMessage) => {
-      return apiRequest("POST", "/api/contact", data);
+      const supabase = createClient();
+      return supabase.from('messages').insert({
+        full_name: data.name,
+        email: data.email,
+        phone: data.phone,
+        subject: data.subject,
+        message: data.message,
+        is_read: false,
+      });
     },
     onSuccess: () => {
       toast({
@@ -188,6 +197,39 @@ export default function ContactSection() {
           
           {/* Contact Form & Map */}
           <div className="space-y-8">
+            {/* Carte Interactive */}
+            <div className="rounded-xl shadow-lg bg-white overflow-hidden">
+              <div className="bg-gray-100 flex flex-col items-center justify-center py-10">
+                <iframe
+                  title="Carte Interactive"
+                  src={`https://www.google.com/maps?q=${encodeURIComponent('4 Avenue Allal Ben Abdellah, Fès, Maroc')}&output=embed`}
+                  width="100%"
+                  height="250"
+                  style={{ border: 0, borderRadius: 12, marginBottom: 16, maxWidth: 500 }}
+                  allowFullScreen
+                  loading="lazy"
+                />
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold mt-2 mb-1">Carte Interactive</h3>
+                  <div className="text-gray-600 mb-2">4 Avenue Allal Ben Abdellah, Fès, Maroc</div>
+                  <Button asChild>
+                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('4 Avenue Allal Ben Abdellah, Fès, Maroc')}`} target="_blank" rel="noopener noreferrer">
+                      Obtenir l'itinéraire
+                    </a>
+                  </Button>
+                </div>
+              </div>
+              <div className="flex justify-between px-6 py-4 bg-white border-t">
+                <div>
+                  <div className="font-semibold">Transport</div>
+                  <div className="text-sm text-gray-600">Accessible en voiture et transport public</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-semibold">Parking</div>
+                  <div className="text-sm text-gray-600">Places disponibles à proximité</div>
+                </div>
+              </div>
+            </div>
             {/* Contact Form */}
             <Card className="shadow-xl">
               <CardContent className="p-8">
@@ -215,7 +257,7 @@ export default function ContactSection() {
                           <FormItem>
                             <FormLabel>{t('contact.form.phone')}</FormLabel>
                             <FormControl>
-                              <Input placeholder="+212 6XX XXX XXX" {...field} />
+                              <Input placeholder={t('contact.form.phonePlaceholder')} {...field} value={String(field.value ?? '')} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -279,36 +321,6 @@ export default function ContactSection() {
                     </Button>
                   </form>
                 </Form>
-              </CardContent>
-            </Card>
-            
-            {/* Map */}
-            <Card className="shadow-lg overflow-hidden">
-              <div className="h-96 bg-gray-200 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="text-teal w-16 h-16 mx-auto mb-4" />
-                    <h4 className="text-xl font-semibold text-deep-black mb-2">{t('contact.interactiveMap')}</h4>
-                    <p className="text-gray-600 mb-4">{t('contact.fullAddress')}</p>
-                    <Button className="bg-teal hover:bg-teal text-white px-6 py-3 rounded-full font-medium transition-colors duration-300">
-                      <i className="fas fa-directions mr-2"></i>
-                      {t('contact.getDirections')}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-semibold text-deep-black">{t('contact.transport')}</h4>
-                    <p className="text-sm text-gray-600">{t('contact.transportInfo')}</p>
-                  </div>
-                  <div className="text-right">
-                    <h4 className="font-semibold text-deep-black">{t('contact.parking')}</h4>
-                    <p className="text-sm text-gray-600">{t('contact.parkingInfo')}</p>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </div>
