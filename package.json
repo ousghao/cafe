@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
-    "build": "cross-env NODE_ENV=production VITE_SUPABASE_URL=https://szqenlopnbjshiachmlh.supabase.co VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6cWVubG9wbmJqc2hpYWNobWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MjM1MzcsImV4cCI6MjA2NzI5OTUzN30.8fjswRq5n08rqIDiE4LbJs6J72uy6gerNdKET2xUtgM vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "build": "cross-env NODE_ENV=production VITE_SUPABASE_URL=https://szqenlopnbjshiachmlh.supabase.co VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6cWVubG9wbmJqc2hpYWNobWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MjM1MzcsImV4cCI6MjA2NzI5OTUzN30.8fjswRq5n08rqIDiE4LbJs6J72uy6gerNdKET2xUtgM vite build && esbuild server/production.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "start": "cross-env NODE_ENV=production node dist/production.js",
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
