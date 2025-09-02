@@ -1,6 +1,27 @@
-# Assouan Fès - Web Admin & Client
+# 🍽️ Assouan Fès - Restaurant Management System
 
-## Prerequisites
+Une application web complète pour la gestion d'un restaurant marocain avec interface d'administration.
+
+## ✨ Fonctionnalités
+
+### 🌐 Site Public
+- **Menu dynamique** avec catégories et plats
+- **Réservations en ligne** avec vérification de disponibilité
+- **Commandes de gâteaux** personnalisés
+- **Contact** et messages
+- **Interface multilingue** (FR/EN/AR)
+- **Design responsive** et moderne
+
+### 🔧 Panel d'Administration
+- **Dashboard** avec statistiques temps réel
+- **Gestion du menu** (types de plats, plats)
+- **Gestion des réservations** 
+- **Suivi des commandes** personnalisées
+- **Messages de contact**
+- **Paramètres du restaurant**
+- **Système de rôles** (Admin/Manager/Viewer)
+
+## 🚀 Démarrage Rapide
 - [Node.js](https://nodejs.org/) (v16+ recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 - [Supabase](https://supabase.com/) account & project

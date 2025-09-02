@@ -3,11 +3,48 @@ import { createServer, type Server } from "http";
 import { SupabaseService } from "./services/supabase-service";
 import { insertReservationSchema, insertCustomCakeInquirySchema, insertContactMessageSchema } from "@shared/schema";
 import { z } from "zod";
+import { testDatabaseConnection } from "./database-check";
 import 'dotenv/config';
 
 const supabaseService = new SupabaseService();
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint
+  app.get("/api/health", async (req, res) => {
+    try {
+      const dbConnected = await testDatabaseConnection();
+      res.json({
+        status: "ok",
+        timestamp: new Date().toISOString(),
+        database: dbConnected ? "connected" : "disconnected",
+        environment: process.env.NODE_ENV || "unknown"
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: "error", 
+        database: "error",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Debug endpoint to check users table
+  app.get("/api/debug/users", async (req, res) => {
+    try {
+      const { data: users, error } = await supabaseService['supabase']
+        .from('users')
+        .select('id, email, role, created_at')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      res.json({ users });
+    } catch (error) {
+      res.status(500).json({
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // Menu endpoints
   app.get("/api/menu", async (req, res) => {
     try {
