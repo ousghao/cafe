@@ -16,11 +16,11 @@
 4. **Configurer les variables d'environnement** :
    ```
    NODE_ENV=production
-   NEXT_PUBLIC_SUPABASE_URL=https://szqenlopnbjshiachmlh.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6cWVubG9wbmJqc2hpYWNobWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MjM1MzcsImV4cCI6MjA2NzI5OTUzN30.8fjswRq5n08rqIDiE4LbJs6J72uy6gerNdKET2xUtgM
-   VITE_SUPABASE_URL=https://szqenlopnbjshiachmlh.supabase.co
-   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6cWVubG9wbmJqc2hpYWNobWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MjM1MzcsImV4cCI6MjA2NzI5OTUzN30.8fjswRq5n08rqIDiE4LbJs6J72uy6gerNdKET2xUtgM
-   DATABASE_URL=postgresql://postgres.szqenlopnbjshiachmlh:VDwL05NbKjn6aVWZ@aws-0-eu-west-3.pooler.supabase.com:5432/postgres
+   NEXT_PUBLIC_SUPABASE_URL=
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=
+   VITE_SUPABASE_URL=
+   VITE_SUPABASE_ANON_KEY=
+   DATABASE_URL=
    ```
 5. **Déployer** : Railway détectera automatiquement le Dockerfile
 

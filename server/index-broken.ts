@@ -1,17 +1,19 @@
-import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
+import express, { type Request, Response, NextFunction } from "e  // importantly only setup vite in development and after
+  // setting up all the other routes so the catch-all route
+  // doesn't interfere with the other routes
+  if (app.get("env") === "development") {
+    const { setupVite } = await import("./vite");
+    await setupVite(app, server);
+  } else {
+    const { serveStatic } = await import("./static");
+    serveStatic(app);
+  }import { registerRoutes } from "./routes";
 import { ensureDatabaseReady } from "./database-check";
 import 'dotenv/config';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Simple log function
-const log = (message: string) => {
-  const now = new Date().toLocaleTimeString();
-  console.log(`${now} [express] ${message}`);
-};
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -43,6 +45,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// Simple log function
+const log = (message: string) => {
+  const now = new Date().toLocaleTimeString();
+  console.log(`${now} [express] ${message}`);
+};
+
 (async () => {
   // Check database connection before starting server
   await ensureDatabaseReady();
@@ -69,7 +77,7 @@ app.use((req, res, next) => {
     const { setupVite } = await import("./vite");
     await setupVite(app, server);
   } else {
-    const { serveStatic } = await import("./static");
+    const { serveStatic } = await import("./vite");
     serveStatic(app);
   }
 
